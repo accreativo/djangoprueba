@@ -1,0 +1,87 @@
+-Instalación
+    python --version
+    pip --version
+    python -m venv ENTORNO
+    ENTORNO\Scripts\activate.bat
+    pip install django -U
+
+-Coneccion mysql
+    https://www.lfd.uci.edu/~gohlke/pythonlibs/
+    Descargar el correspondiente a tu version
+    Coloca el archivo en la raíz
+    Instala en tu entorno
+    pipenv install nombrearchivo
+
+-Creación del proyecto
+    django-admin startproject NombreProyecto .
+
+-pdb es un debuguer
+    ¿Cómo lo generamos?
+    import pdb; pdb.set_trace()
+
+-Creación de una app
+    python manage.py startapp NombreApp
+    configuras el verbose_name
+    instalas la app en settings.py en tu raiz
+
+-Uso de templates
+    Dentro de una app creamos una carpeta de templates
+
+-Models
+    Crear Migraciones: python manage.py makemigrations
+    Correr Migraciones: python manage.py migrate
+    #Crear Modelo
+    importamos-> from django.db import models / Creamos una clase -> class Post(models.Model):
+    #Campos
+    https://docs.djangoproject.com/en/2.0/ref/models/fields/
+
+    #Queries https://docs.djangoproject.com/en/2.0/topics/db/queries/
+    Clase.objects.get(filtro) -> Recibe uno
+    Clase.objects.filter(filtro) -> Recibe uno
+    Clase.objects.filter(filtro).update(cambio) -> Actualiza en masa
+    Clase.objects.all() -> Regresa todos
+
+    #Crear SuperUsuario
+    python manage.py createsuperuser
+
+-Extension Usuario
+    from django.contrib.auth.models import User
+    #ForgeinKey
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+-Admin django https://docs.djangoproject.com/en/2.0/ref/contrib/admin/
+    list_diplay = ('campo1' ... 'campo n') ->Mostrar campos
+    list_diplay_links = ('campo1' ... 'campo n') ->Linkear
+    list_editable = ('campo1' ... 'campo n') ->Campos editables
+    search_fields = ('campo1' ... 'campo n') ->Busqueda a partir de esos campos
+    list_filter = ('campo1' ... 'campo n') ->Filtros  a partir de esos campos
+
+    Edicion relacionada de modelos
+    StackedInline
+    TabularInline
+
+-Imagenes
+    En url
+    from django.conf.urls.static import static
+    from django.conf import settings
+
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+-templates
+    {%block nombre_content endblock%}
+
+
+    {% extends nombre_template %}
+
+-static files (css, js, assets)
+    {% static 'ruta del archivo/archivo' %}
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR,'static'),
+    )
+
+    STATICFILES_FINDERS = [
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    ]
